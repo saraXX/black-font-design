@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 1 ;
     Button FIB ;
     ImageView img;
+    Uri fullPhotoUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri fullPhotoUri = data.getData();
+            fullPhotoUri = data.getData();
             img.setImageURI(fullPhotoUri);
         }
     }
@@ -44,4 +47,9 @@ public class MainActivity extends AppCompatActivity {
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent,"select pic"), PICK_IMAGE);
         }
+     public void filterImage(Uri img){
+         Drawable drawable = Drawable.createFromPath(img.getPath());
+//         drawable.setColorFilter();
+     }
+
 }
